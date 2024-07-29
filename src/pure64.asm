@@ -454,7 +454,7 @@ bios_memmap_end820:
 memmap_end:
 
 ; FIXME - Don't hardcode the RAM to 64MiB
-	mov eax, 64
+	mov eax, 1024
 	mov dword [p_mem_amount], eax
 
 ; Create the High Page-Directory-Pointer-Table Entries (PDPTE)
@@ -480,7 +480,7 @@ create_pdpe_high:
 	mov edi, 0x00020000		; Location of first PDE
 	mov eax, 0x0000008F		; Bits 0 (P), 1 (R/W), 2 (U/S), 3 (PWT), and 7 (PS) set
 	add rax, 0x00400000		; Start at 4MiB in
-	mov ecx, 32			; Create 32 2MiB page maps
+	mov ecx, 512			; Create 32 2MiB page maps
 pde_high:				; Create a 2MiB page
 	stosq
 	add rax, 0x00200000		; Increment by 2MiB
